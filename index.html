@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socket Client</title>
+</head>
+<body>
+  <div id="receivedValues"></div>
+
+  <script>
+    function receiveValues() {
+      const socket = new WebSocket('ws://127.0.0.1:8080'); // WebSocket connection to the server
+
+      socket.onopen = function(event) {
+        console.log('Socket opened');
+
+        // socket.send('get_values'); // Send a request to the server
+      };
+
+      socket.onmessage = function(event) {
+        console.log('Received message:', event.data);
+        
+        // Display received values in the HTML page
+        const receivedValuesDiv = document.getElementById('receivedValues');
+        receivedValuesDiv.innerHTML = event.data;
+      };
+
+      socket.onclose = function(event) {
+        console.log('Socket closed');
+      };
+
+      socket.onerror = function(error) {
+        console.error('Socket error:', error);
+      };
+    }
+
+    // Call the function on page load
+    window.onload = receiveValues;
+  </script>
+</body>
+</html>

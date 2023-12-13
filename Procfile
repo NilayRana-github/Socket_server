@@ -1,0 +1,1 @@
+worker: python Socket_server.py
